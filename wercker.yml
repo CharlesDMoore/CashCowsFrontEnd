@@ -12,4 +12,4 @@ push:
         tag: $DOCKER_TAG
         repository: $DOCKER_REPOSITORY
         registry: https://index.docker.io/v2/
-        cmd: node pipeline/source/CashCowsFrontEnd/app.js
+        cmd: node pipeline/source/CashCowsFrontEnd/server.js
