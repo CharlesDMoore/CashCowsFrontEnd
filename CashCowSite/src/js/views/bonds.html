@@ -1,0 +1,309 @@
+<!-- <!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+ 
+<div class="oj-hybrid-padding">
+  <h1>BondPro</h1>
+  <div id="tableDemo">
+      <oj-table id='table1' aria-label='testTable'
+  data='[[dataSource]]'
+  columns='[
+        {"headerText": "ID", "field": "id"},
+        {"headerText": "Taxable", "field": "taxable"},
+        {"headerText": "Symbol", "field": "symbol"},
+        {"headerText": "Market Price", "field": "market_price"},
+        {"headerText": "Current Yield", "field": "current_yield"},        
+        {"headerText": "Coupon Rate", "field": "coupon_rate"},
+        {"headerText": "Payment Date", "field": "pmt_date"},
+        {"headerText": "Call Date", "field": "call_date"},
+        {"headerText": "Call Amount", "field": "call_amount"},
+        {"headerText": "Maturity", "field": "maturity"},
+        {"headerText": "Maturity Amount", "field": "maturity_amount"},
+        {"headerText": "Purchase Date", "field": "purchase_date"}
+        ]'
+        style='width: 95%;'></oj-table>
+        <oj-button id='removeButton' on-oj-action='[[removeRow]]'>Remove</oj-button>
+        <br><br><br><br><br><br>
+        
+        <oj-button id="btnGo" on-click="[[openListener]]">Update</oj-button>
+        <button type="button" data-bind="click: toggleVisibility">Add Bond</button>
+        <br><br>
+        <div id="form-container" data-bind="visible: showNewBond">
+        
+            <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label for="text-input">Taxable</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="newTaxable"
+                           type="text"
+                           data-bind="ojComponent: {component: 'ojInputText',
+                                  value: newTaxable}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="text-input">Symbol</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="text"
+                           id="newSymbol"
+                           data-bind="ojComponent: {component: 'ojInputText',
+                                  value: newSymbol}"/>
+               </div>
+                </div>
+                
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Coupon Rate</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="newCouponRate"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newCouponRate}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Payment Day</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="newPaymentDay"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newPaymentDay}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Payment Month</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="newPaymentMonth"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newPaymentMonth}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-date">Call Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="date"
+                           id="newCallDate"
+                           data-bind="ojComponent: {component: 'ojInputDate',
+                                  value: newCallDate}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Call Amount</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="password"
+                           id="newCallAmount"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newCallAmount}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-date">Maturity</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="date"
+                           id="newMaturity"
+                           data-bind="ojComponent: {component: 'ojInputDate',
+                                  value: newMaturity}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Maturity Amount</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="newMaturityAmount"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newMaturityAmount}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-date">Purchase Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="date"
+                           id="newPurchaseDate"
+                           data-bind="ojComponent: {component: 'ojInputDate',
+                                  value: newPurchaseDate}"/>
+               </div>
+                </div>
+                <br>
+                <div class="oj-flex-bar ">
+                    <div class="oj-flex-bar-middle">
+                        <input id="inputButton" class="hk-xh-login-btn" type="button"
+                               data-bind="click: newBond, ojComponent: {component: 'ojButton', label: 'Add Bond', chroming: 'full'}"/>
+
+                        <!--
+                        <input id="registerButton" class="hk-xh-login-btn" type="button"
+                              data-bind="click: register, ojComponent: {component: 'ojButton', label: 'Register', chroming: 'full'}"/>
+                        -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="popupWrapper">
+          <oj-popup id="popup1" class="demo-popup"
+            tail="none" position.my.horizontal="center" position.my.vertical="bottom"
+            position.at.horizontal="center" position.at.vertical="bottom"
+            position.of="window" position.offset.y="-10"
+            modality="modal" on-oj-animate-start="[[startAnimationListener]]">
+              <div class="demo-popup-body">
+                <div class="demo-popup-header"><h5>Update Bond</h5></div>
+                <div class="demo-popup-content">
+                    <div class="oj-form oj-sm-odd-cols-12 oj-md-odd-cols-4 oj-md-labels-inline">
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                        <label for="text-input">Taxable</label>
+                    </div>
+                    <div class="oj-flex-item">
+                        <input id="updateTaxable"
+                           type="text"
+                           data-bind="ojComponent: {component: 'ojInputText',
+                                  value: newTaxable}"/>
+                    </div>
+                </div>
+                <br/>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="text-input">Symbol</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="text"
+                           id="updateSymbol"
+                           data-bind="ojComponent: {component: 'ojInputText',
+                                  value: newSymbol}"/>
+               </div>
+                </div>
+                
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Coupon Rate</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="updateCouponRate"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newCouponRate}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Payment Day</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="updateaymentDay"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newPaymentDay}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Payment Month</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="updatePaymentMonth"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newPaymentMonth}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-date">Call Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="date"
+                           id="updateCallDate"
+                           data-bind="ojComponent: {component: 'ojInputDate',
+                                  value: newCallDate}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Call Amount</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="password"
+                           id="updateCallAmount"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newCallAmount}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-date">Maturity</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="date"
+                           id="updateMaturity"
+                           data-bind="ojComponent: {component: 'ojInputDate',
+                                  value: newMaturity}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-number">Maturity Amount</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="number"
+                           id="updateMaturityAmount"
+                           data-bind="ojComponent: {component: 'ojInputNumber',
+                                  value: newMaturityAmount}"/>
+               </div>
+                </div>
+                <div class="oj-flex">
+                    <div class="oj-flex-item">
+                    <label for="oj-input-date">Purchase Date</label>
+                    </div>
+                    <div class="oj-flex-item">
+                    <input type="date"
+                           id="updatePurchaseDate"
+                           data-bind="ojComponent: {component: 'ojInputDate',
+                                  value: newPurchaseDate}"/>
+               </div>
+                </div>
+                <br>
+                <div class="oj-flex-bar ">
+                    <div class="oj-flex-bar-middle">
+                        <input id="inputButton" class="hk-xh-login-btn" type="button"
+                               data-bind="click: newBond, ojComponent: {component: 'ojButton', label: 'Update Bond', chroming: 'full'}"/>
+
+                        <!--
+                        <input id="registerButton" class="hk-xh-login-btn" type="button"
+                              data-bind="click: register, ojComponent: {component: 'ojButton', label: 'Register', chroming: 'full'}"/>
+                        -->
+                    </div>
+                </div>
+            </div>
+                </div>
+                <div class="demo-popup-footer">
+                  <oj-button id="btnCancel"  on-click="[[cancelListener]]">
+                    Cancel
+                  </oj-button>
+                </div>
+              </div>    
+          </oj-popup>
+          
+        </div>
+</div>
+  </div>
+  
+ 

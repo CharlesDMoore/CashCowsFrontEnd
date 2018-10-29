@@ -1,0 +1,28 @@
+<!--
+ Copyright (c) 2014, 2018, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <h1>Dashboard Content Area</h1>
+        <div id="containerDiv">
+          <oj-label for="basicSelect">Select One</oj-label>
+          <oj-select-one id="basicSelect" value="{{val}}" style="max-width:20em">
+            <oj-option value="line">Line</oj-option>
+            <oj-option value="pie">Pie</oj-option>
+            <oj-option value="bar">Bar</oj-option>
+
+          </oj-select-one>
+          
+          <oj-chart id="barChart"
+                  type="{{val}}" 
+                  orientation="[[orientationValue]]"
+                  stack="[[stackValue]]"
+                  series="[[barSeriesValue]]"
+                  groups="[[barGroupsValue]]" 
+                  animation-on-display="auto"
+                  animation-on-data-change="auto"
+                  hover-behavior="dim"
+                 style="width:500px;height:350px;">
+            </oj-chart>
+        </div>
+</div>

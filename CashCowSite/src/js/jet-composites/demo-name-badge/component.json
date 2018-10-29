@@ -1,0 +1,15 @@
+{
+  "name": "demo-name-badge",
+  "displayName": "demo-name-badge",
+  "description": "Component for displaying a badge with a name and an image",
+  "version": "1.0.0",
+  "jetVersion": "^5.0.0",
+  "properties": {
+      "badgeName" : {
+      "type" : "string"
+    },
+      "badgeImage" : {
+      "type" : "string"
+    }
+  }
+}

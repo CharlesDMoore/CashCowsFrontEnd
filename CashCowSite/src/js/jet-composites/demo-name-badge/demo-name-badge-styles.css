@@ -1,0 +1,17 @@
+demo-name-badge:not(.oj-complete){
+  visibility: hidden;
+}
+demo-name-badge{
+  display : block;
+  width : 200px;
+  height: 200px;
+  margin : 10px;
+}
+demo-name-badge .badge-face {
+  height : 100%;
+  width : 100%;
+  background-color : #80C3C8;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 30px;
+}
